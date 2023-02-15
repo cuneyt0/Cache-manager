@@ -25,16 +25,29 @@ class HomePage extends StatelessWidget {
                   await HiveHelper.shared
                       .add<User>(boxName: HiveHelper.userBoxKey, data: user);
                 },
-                child: const Text("Kaydet")),
+                child: const Text("Save")),
             TextButton(
               onPressed: () async {
                 var a = HiveHelper.shared.getValues<User>(
                   boxName: HiveHelper.userBoxKey,
                 );
 
-                print(a.first.name);
+                print(a.last.name);
               },
-              child: const Text("Get"),
+              child: const Text("GetValues"),
+            ),
+            TextButton(
+              onPressed: () async {
+                HiveHelper.shared.put<User>(
+                  boxName: HiveHelper.userBoxKey,
+                  data: User(
+                      id: 2,
+                      token: 'eyblaasdas.aasdasdasd.asdasd',
+                      name: "Ahmet"),
+                  key: HiveHelper.userKey,
+                );
+              },
+              child: const Text("put"),
             )
           ],
         ),
